@@ -33,7 +33,7 @@ export class FanService extends SeatersService {
   public fanProfilingService: FanProfilingService;
   public fanSurveyService: FanSurveyService;
 
-  constructor(seatersApi: SeatersApi, private sessionService: SessionService, private publicService: PublicService) {
+  constructor(seatersApi: SeatersApi, private sessionService: SessionService) {
     super(seatersApi);
     this.waitingListService = new WaitingListService(seatersApi);
     this.fanGroupService = new FanGroupService(seatersApi);
@@ -410,21 +410,6 @@ export class FanService extends SeatersService {
     return this.seatersApi.fan
       .updateMobilePhoneNumber(data)
       .then(updatedFan => this.sessionService.updateCurrentFan(updatedFan));
-  }
-
-  getWaitingListsByKeywords(keywords: string[], page: PagingOptions): Promise<PagedResult<fan.WaitingList>> {
-    return this.publicService.getWaitingListsByKeywords(keywords, page).then(pagedPublicWls => {
-      const waitingListIds = pagedPublicWls.items.map(wl => wl.waitingListId);
-      return this.getWaitingLists(waitingListIds).then(wls => {
-        return {
-          items: wls,
-          itemOffset: pagedPublicWls.itemOffset,
-          maxPageSize: pagedPublicWls.maxPageSize,
-          page: pagedPublicWls.page,
-          totalSize: pagedPublicWls.totalSize
-        } as PagedResult<fan.WaitingList>;
-      });
-    });
   }
 
   // Profiling (public)

@@ -1,17 +1,38 @@
 import { RequestDriver } from '../../api';
 import { PagedResult, PagingOptions } from '../../shared-types';
-import { SeatersApi } from '../../seaters-api';
-import { AlgoliaForSeatersService, SearchSeatersContentOptions, TypedSearchResult, GeoLoc} from '../algolia-for-seaters';
+import { SeatersApi, SeatersApiContext } from '../../seaters-api';
+import { AlgoliaForSeatersService, TypedSearchResult, GeoLoc } from '../algolia-for-seaters';
 
 import { AppService } from '../app-service';
 import { pub } from './public-types';
 import { fan } from '../fan-service/fan-types';
+type ACCESS_MODE = 'PUBLIC' | 'PRIVATE' | 'CODE_PROTECTED';
+interface FanGroupLook {
+  accessMode: ACCESS_MODE;
 
+  profileImageUrl: string;
+  coverImageUrl: string;
+  backgroundImageUrl: string;
+  rankAndLikelihoodHidden: boolean;
+  showLogo: boolean;
+  color: string;
+
+  // Translated
+  translatedWelcomeText: string;
+  translatedName: string;
+  translatedExperienceName: string;
+  translatedDescription: string;
+
+  // Not translated (translation map)
+  welcomeText: any;
+  description: any;
+  name: any;
+}
 export class PublicService {
   private algoliaForSeatersService: AlgoliaForSeatersService;
 
-  constructor(appService: AppService, requestDriver: RequestDriver, private seatersApi: SeatersApi) {
-    this.algoliaForSeatersService = new AlgoliaForSeatersService(appService, requestDriver);
+  constructor(apiContext: SeatersApiContext, requestDriver: RequestDriver) {
+    this.algoliaForSeatersService = new AlgoliaForSeatersService(apiContext, requestDriver);
   }
 
   getFanGroup(fanGroupId: string): Promise<pub.FanGroup> {
@@ -21,99 +42,29 @@ export class PublicService {
     }));
   }
 
-  getFanGroupLookBySlug(slug: string): Promise<fan.FanGroupLook> {
-    return this.seatersApi.fan.fanGroupLook(slug).then(fg => ({
-      ...fg,
-      actionStatus: this.getFanGroupActionStatus(fg)
-    }));
-  }
-
-  getFanGroups(fanGroupIds: string[]): Promise<pub.FanGroup[]> {
-    return this.algoliaForSeatersService
-      .getFanGroupsById(fanGroupIds)
-      .then(result => result.map(fg => ({ ...fg, actionStatus: this.getFanGroupActionStatus(fg) })));
-  }
-
   getWaitingList(waitingListId: string): Promise<pub.WaitingList> {
     return this.algoliaForSeatersService
       .getWaitingListById(waitingListId)
       .then(wl => ({ ...wl, actionStatus: this.getWaitingListActionStatus(wl) }));
   }
 
-  getWaitingListsInFanGroup(fanGroupId: string, pagingOptions: PagingOptions, geoLoc?: GeoLoc, keywords?: string[], dateTimeStamp?: string): Promise<PagedResult<pub.WaitingList>> {
-    return this.algoliaForSeatersService
-      .getWaitingListsByFanGroupId(fanGroupId, pagingOptions.maxPageSize, pagingOptions.page, geoLoc, keywords, dateTimeStamp)
-      .then(result => this.convertAlgoliaResultSet(result))
-      .then(result => {
-        result.items = result.items.map(wl => ({ ...wl, actionStatus: this.getWaitingListActionStatus(wl) }));
-        return result;
-      });
-  }
-
-  getWaitingListsInFanGroups(
-    fanGroupIds: string[],
-    pagingOptions: PagingOptions
-  ): Promise<PagedResult<pub.WaitingList>> {
-    return this.algoliaForSeatersService
-      .getWaitingListsByFanGroupIds(fanGroupIds, pagingOptions.maxPageSize, pagingOptions.page)
-      .then(result => this.convertAlgoliaResultSet(result))
-      .then(result => {
-        result.items = result.items.map(wl => ({ ...wl, actionStatus: this.getWaitingListActionStatus(wl) }));
-        return result;
-      });
-  }
-
-  getWaitingListPrice(waitingListId: string, numberOfSeats: number): Promise<pub.Price> {
-    return this.seatersApi.fan.waitingListPrice(waitingListId, numberOfSeats) as Promise<pub.Price>;
-  }
-
-  searchSeatersContent(
-    query: string,
-    locale: string,
-    page?: PagingOptions,
-    options?: SearchSeatersContentOptions
-  ): Promise<PagedResult<pub.SeatersContent>> {
-    page = this.defaultPage(page);
-    return this.algoliaForSeatersService
-      .searchSeatersContent(query, locale, page.maxPageSize, page.page, options)
-      .then(result => this.convertAlgoliaResultSet<pub.SeatersContent>(result))
-      .then(result => {
-        result.items = result.items.map(content => {
-          if (content.type === 'WAITING_LIST') {
-            content = { ...content, actionStatus: this.getWaitingListActionStatus(content) };
-          }
-
-          if (content.type === 'FAN_GROUP') {
-            content = { ...content, actionStatus: this.getFanGroupActionStatus(content) };
-          }
-
-          return content;
-        });
-        return result;
-      });
-  }
-
-  searchWaitingListsInFanGroup(
+  getWaitingListsInFanGroup(
     fanGroupId: string,
-    query: string,
-    locale: string,
-    page?: PagingOptions
+    pagingOptions: PagingOptions,
+    geoLoc?: GeoLoc,
+    keywords?: string[],
+    dateTimeStamp?: string
   ): Promise<PagedResult<pub.WaitingList>> {
-    page = this.defaultPage(page);
     return this.algoliaForSeatersService
-      .searchWaitingListsInFanGroup(fanGroupId, query, locale, page.maxPageSize, page.page)
-      .then(result => this.convertAlgoliaResultSet<pub.WaitingList>(result))
-      .then(result => {
-        result.items = result.items.map(wl => ({ ...wl, actionStatus: this.getWaitingListActionStatus(wl) }));
-        return result;
-      });
-  }
-
-  getWaitingListsByKeywords(keywords: string[], page?: PagingOptions): Promise<PagedResult<pub.WaitingList>> {
-    page = this.defaultPage(page);
-    return this.algoliaForSeatersService
-      .getWaitingListsByKeywords(keywords, page.maxPageSize, page.page)
-      .then(result => this.convertAlgoliaResultSet<pub.WaitingList>(result))
+      .getWaitingListsByFanGroupId(
+        fanGroupId,
+        pagingOptions.maxPageSize,
+        pagingOptions.page,
+        geoLoc,
+        keywords,
+        dateTimeStamp
+      )
+      .then(result => this.convertAlgoliaResultSet(result))
       .then(result => {
         result.items = result.items.map(wl => ({ ...wl, actionStatus: this.getWaitingListActionStatus(wl) }));
         return result;

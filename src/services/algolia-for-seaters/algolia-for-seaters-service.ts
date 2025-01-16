@@ -13,6 +13,7 @@ import {
   WL_ALGOLIA_TYPE,
   GeoLoc
 } from './algolia-for-seaters-types';
+import { SeatersApiContext } from '../../seaters-api';
 
 const DEFAULT_LOCALE = 'en';
 const WL_FACET_FILTER: FacetFilter = { facet: TYPE_FIELD, value: WL_ALGOLIA_TYPE };
@@ -24,11 +25,10 @@ export class AlgoliaForSeatersService {
 
   private searchIndex: string;
 
-  constructor(private appService: AppService, private requestDriver: RequestDriver) {}
+  constructor(private apiContext: SeatersApiContext, private requestDriver: RequestDriver) {}
 
   getFanGroupById(fanGroupId: string): Promise<FanGroup> {
-    const q = this.buildExactQuery(fanGroupId, 'fanGroupId', FG_ALGOLIA_TYPE);
-    return this.findExactlyOne<FanGroup>(q, 'FanGroup', fanGroupId);
+    return this.apiContext.get('/fan/groups/:fanGroupId', { fanGroupId });
   }
 
   getFanGroupsById(fanGroupIds: string[]): Promise<FanGroup[]> {
@@ -50,125 +50,23 @@ export class AlgoliaForSeatersService {
   getWaitingListsByFanGroupId(
     fanGroupId: string,
     hitsPerPage: number,
-    page: number,
-    geoLoc?: GeoLoc, 
-    keywords?: string[], 
-    dateTimeStamp?: string
-  ): Promise<TypedSearchResult<WaitingList>> {
-    // TODO: sort by date ascending
-    const q = this.buildExactQuery(fanGroupId, 'groupId', 'WAITING_LIST', geoLoc, keywords, dateTimeStamp);
-    q.page = page;
-    q.hitsPerPage = hitsPerPage;
-    return this.search(q).then(r => this.stripAlgoliaFieldsFromSearchResultHits(r));
-  }
-
-  getWaitingListsByFanGroupIds(
-    fanGroupIds: string[],
-    hitsPerPage: number,
     page: number
   ): Promise<TypedSearchResult<WaitingList>> {
-    const fanGroupIdsFilter = fanGroupIds.map(fanGroupId => 'groupId:' + fanGroupId).join(' OR ');
-    const q: SearchQuery = {
-      query: '',
-      typoTolerance: TYPO_TOLERANCE_STRICT,
-      facetFilters: [WL_FACET_FILTER],
-      filters: fanGroupIdsFilter,
-      page,
-      hitsPerPage
-    };
-    return this.search(q).then(r => this.stripAlgoliaFieldsFromSearchResultHits(r));
+    return this.apiContext.get(`/groups/${fanGroupId}/wishlists/publicsdk`, {}, { page, maxPageSize: hitsPerPage });
   }
 
   getWaitingListById(waitingListId: string): Promise<WaitingList> {
-    const q = this.buildExactQuery(waitingListId, 'waitingListId', 'WAITING_LIST');
-    return this.findExactlyOne<WaitingList>(q, 'WaitingList', waitingListId);
+    return this.apiContext.get(`/public/wishlists/${waitingListId}/public`);
   }
 
-  search(searchQuery: SearchQuery): Promise<SearchResult> {
-    return this.api()
-      .then(api => api.indices.searchIndex(this.searchIndex, searchQuery))
-      .then(res => {
-        res.hits.filter(item => item.type === WL_ALGOLIA_TYPE).forEach(item => this.patchWaitingList(item));
-        return res;
-      });
-  }
-
-  searchWaitingListsInFanGroup(
-    fanGroupId: string,
+  private buildExactQuery(
     query: string,
-    locale: string,
-    hitsPerPage: number,
-    page: number
-  ): Promise<TypedSearchResult<WaitingList>> {
-    return this.getSearchableAttributes(locale).then(searchableAttributes => {
-      const q: SearchQuery = {
-        query,
-        facetFilters: [
-          WL_FACET_FILTER,
-          // specific fangroup filter
-          {
-            facet: 'groupId',
-            value: fanGroupId
-          }
-        ],
-       
-        restrictSearchableAttributes: searchableAttributes,
-        hitsPerPage,
-        page
-      };
-      return this.search(q).then(r => this.stripAlgoliaFieldsFromSearchResultHits(r));
-    });
-  }
-  searchSeatersContent(
-    query: string,
-    locale: string,
-    hitsPerPage: number,
-    page: number,
-    options?: SearchSeatersContentOptions
-  ): Promise<SearchResult> {
-    return this.getSearchableAttributes(locale).then(searchableAttributes => {
-      const q: SearchQuery = {
-        query,
-        facetFilters: [],
-        restrictSearchableAttributes: searchableAttributes,
-        hitsPerPage,
-        page
-      };
-
-      if (options.onlyFanGroups) {
-        q.facetFilters.push(FAN_GROUP_FACET_FILTER);
-      }
-      if (options.onlyWaitingLists) {
-        q.facetFilters.push(WL_FACET_FILTER);
-      }
-
-      return this.search(q).then(r => this.stripAlgoliaFieldsFromSearchResultHits(r));
-    });
-  }
-
-  getWaitingListsByKeywords(keywords: string[], hitsPerPage: number, page: number): Promise<SearchResult> {
-    const q: SearchQuery = {
-      query: '',
-      facetFilters: [WL_FACET_FILTER],
-      hitsPerPage,
-      page,
-      tagFilters: keywords
-    };
-    return this.search(q).then(r => this.stripAlgoliaFieldsFromSearchResultHits(r));
-  }
-
-  private api(): Promise<AlgoliaApi> {
-    if (!this._apiP) {
-      this._apiP = this.appService.getEnv().then(env => {
-        const cfg = env.algoliaConfiguration;
-        this.searchIndex = cfg.indexName;
-        return new AlgoliaApi(cfg.appId, cfg.apiKey, this.requestDriver);
-      });
-    }
-    return this._apiP;
-  }
-
-  private buildExactQuery(query: string, field: string, type: string, geoLoc?: GeoLoc, keywords?: string[], dateTimeStamp?: string): SearchQuery {
+    field: string,
+    type: string,
+    geoLoc?: GeoLoc,
+    keywords?: string[],
+    dateTimeStamp?: string
+  ): SearchQuery {
     return {
       query,
       typoTolerance: 'strict',
@@ -180,7 +78,7 @@ export class AlgoliaForSeatersService {
       ],
       aroundLatLng: geoLoc ? geoLoc.coord : undefined,
       aroundRadius: geoLoc ? geoLoc.radius : undefined,
-      filters:  dateTimeStamp ? `eventStartDateTimestamp:${dateTimeStamp}` : undefined,
+      filters: dateTimeStamp ? `eventStartDateTimestamp:${dateTimeStamp}` : undefined,
       tagFilters: keywords,
       restrictSearchableAttributes: [field]
     } as SearchQuery;

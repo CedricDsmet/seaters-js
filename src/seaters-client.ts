@@ -44,8 +44,8 @@ export class SeatersClient {
     this.seatersApi = new SeatersApi(options.apiPrefix, requestDriver);
     this.sessionService = new SessionService(this.seatersApi);
     this.appService = new AppService(this.seatersApi);
-    this.publicService = new PublicService(this.appService, requestDriver, this.seatersApi);
-    this.fanService = new FanService(this.seatersApi, this.sessionService, this.publicService);
+    this.publicService = new PublicService(this.seatersApi.apiContext, requestDriver);
+    this.fanService = new FanService(this.seatersApi, this.sessionService);
     this.adminService = new AdminService(this.seatersApi);
     this.ticketingService = new TicketingService(this.seatersApi);
     this.paymentService = new PaymentService(this.seatersApi);
