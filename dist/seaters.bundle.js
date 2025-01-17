@@ -63,7 +63,7 @@ var SeatersSDK = /******/ (function(modules) {
   /******/
   /******/ /******/ __webpack_require__.p = '/Users/cedricdesmet/Documents/seaters-js/dist'; // Load entry module and return exports
   /******/
-  /******/ /******/ return __webpack_require__((__webpack_require__.s = 21));
+  /******/ /******/ return __webpack_require__((__webpack_require__.s = 20));
   /******/
 })(
   /************************************************************************/
@@ -78,14 +78,14 @@ var SeatersSDK = /******/ (function(modules) {
         }
       }
       Object.defineProperty(exports, '__esModule', { value: true });
-      __export(__webpack_require__(27));
+      __export(__webpack_require__(26));
       __export(__webpack_require__(11));
+      __export(__webpack_require__(27));
       __export(__webpack_require__(28));
-      __export(__webpack_require__(29));
       __export(__webpack_require__(9));
+      __export(__webpack_require__(29));
       __export(__webpack_require__(30));
       __export(__webpack_require__(31));
-      __export(__webpack_require__(32));
 
       /***/
     },
@@ -99,11 +99,11 @@ var SeatersSDK = /******/ (function(modules) {
         }
       }
       Object.defineProperty(exports, '__esModule', { value: true });
-      __export(__webpack_require__(34));
+      __export(__webpack_require__(33));
       __export(__webpack_require__(5));
       __export(__webpack_require__(14));
+      __export(__webpack_require__(43));
       __export(__webpack_require__(44));
-      __export(__webpack_require__(45));
       __export(__webpack_require__(6));
       __export(__webpack_require__(17));
       __export(__webpack_require__(12));
@@ -151,7 +151,7 @@ var SeatersSDK = /******/ (function(modules) {
         }
       }
       Object.defineProperty(exports, '__esModule', { value: true });
-      __export(__webpack_require__(49));
+      __export(__webpack_require__(48));
       var seaters_api_1 = __webpack_require__(1);
       exports.SeatersApi = seaters_api_1.SeatersApi;
 
@@ -1351,10 +1351,10 @@ var SeatersSDK = /******/ (function(modules) {
         }
       }
       Object.defineProperty(exports, '__esModule', { value: true });
-      __export(__webpack_require__(23));
+      __export(__webpack_require__(22));
       __export(__webpack_require__(10));
+      __export(__webpack_require__(23));
       __export(__webpack_require__(24));
-      __export(__webpack_require__(25));
 
       /***/
     },
@@ -1557,7 +1557,7 @@ var SeatersSDK = /******/ (function(modules) {
       }
       Object.defineProperty(exports, '__esModule', { value: true });
       __export(__webpack_require__(6));
-      __export(__webpack_require__(35));
+      __export(__webpack_require__(34));
 
       /***/
     },
@@ -2625,27 +2625,10 @@ var SeatersSDK = /******/ (function(modules) {
         }
       }
       Object.defineProperty(exports, '__esModule', { value: true });
-      __export(__webpack_require__(56));
-      __export(__webpack_require__(57));
-      exports.TYPE_FIELD = 'type';
-      exports.TYPO_TOLERANCE_STRICT = 'strict';
-
-      /***/
-    },
-    /* 21 */
-    /***/ function(module, exports, __webpack_require__) {
-      'use strict';
-
-      function __export(m) {
-        for (var p in m) {
-          if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-        }
-      }
-      Object.defineProperty(exports, '__esModule', { value: true });
       //noinspection TsLint
       // tslint:disable-next-line
       exports.version = '1.37.1';
-      __export(__webpack_require__(22));
+      __export(__webpack_require__(21));
       var fan_types_1 = __webpack_require__(2);
       exports.fan = fan_types_1.fan;
       var profiling_types_1 = __webpack_require__(4);
@@ -2653,7 +2636,7 @@ var SeatersSDK = /******/ (function(modules) {
 
       /***/
     },
-    /* 22 */
+    /* 21 */
     /***/ function(module, exports, __webpack_require__) {
       'use strict';
 
@@ -2672,7 +2655,7 @@ var SeatersSDK = /******/ (function(modules) {
       Object.defineProperty(exports, '__esModule', { value: true });
       var api_1 = __webpack_require__(8);
       var seaters_api_1 = __webpack_require__(1);
-      var services_1 = __webpack_require__(46);
+      var services_1 = __webpack_require__(45);
       var SeatersClient = /** @class */ (function() {
         function SeatersClient(options) {
           options = __assign({}, SeatersClient.DEFAULT_OPTIONS, options);
@@ -2745,7 +2728,7 @@ var SeatersSDK = /******/ (function(modules) {
 
       /***/
     },
-    /* 23 */
+    /* 22 */
     /***/ function(module, exports, __webpack_require__) {
       'use strict';
 
@@ -2829,7 +2812,7 @@ var SeatersSDK = /******/ (function(modules) {
 
       /***/
     },
-    /* 24 */
+    /* 23 */
     /***/ function(module, exports, __webpack_require__) {
       'use strict';
 
@@ -2843,7 +2826,7 @@ var SeatersSDK = /******/ (function(modules) {
 
       /***/
     },
-    /* 25 */
+    /* 24 */
     /***/ function(module, exports, __webpack_require__) {
       'use strict';
 
@@ -2854,16 +2837,16 @@ var SeatersSDK = /******/ (function(modules) {
       function getRequestDriver(type) {
         switch (type) {
           case 'BROWSER':
-            return __webpack_require__(26).default;
+            return __webpack_require__(25).default;
           default:
-            return __webpack_require__(33).default;
+            return __webpack_require__(32).default;
         }
       }
       exports.getRequestDriver = getRequestDriver;
 
       /***/
     },
-    /* 26 */
+    /* 25 */
     /***/ function(module, exports, __webpack_require__) {
       'use strict';
 
@@ -2913,7 +2896,7 @@ var SeatersSDK = /******/ (function(modules) {
 
       /***/
     },
-    /* 27 */
+    /* 26 */
     /***/ function(module, exports, __webpack_require__) {
       'use strict';
 
@@ -3001,7 +2984,7 @@ var SeatersSDK = /******/ (function(modules) {
 
       /***/
     },
-    /* 28 */
+    /* 27 */
     /***/ function(module, exports, __webpack_require__) {
       'use strict';
 
@@ -3101,7 +3084,7 @@ var SeatersSDK = /******/ (function(modules) {
 
       /***/
     },
-    /* 29 */
+    /* 28 */
     /***/ function(module, exports, __webpack_require__) {
       'use strict';
 
@@ -3153,7 +3136,7 @@ var SeatersSDK = /******/ (function(modules) {
 
       /***/
     },
-    /* 30 */
+    /* 29 */
     /***/ function(module, exports, __webpack_require__) {
       'use strict';
 
@@ -3190,7 +3173,7 @@ var SeatersSDK = /******/ (function(modules) {
 
       /***/
     },
-    /* 31 */
+    /* 30 */
     /***/ function(module, exports, __webpack_require__) {
       'use strict';
 
@@ -3208,7 +3191,7 @@ var SeatersSDK = /******/ (function(modules) {
 
       /***/
     },
-    /* 32 */
+    /* 31 */
     /***/ function(module, exports, __webpack_require__) {
       'use strict';
 
@@ -3224,7 +3207,7 @@ var SeatersSDK = /******/ (function(modules) {
 
       /***/
     },
-    /* 33 */
+    /* 32 */
     /***/ function(module, exports, __webpack_require__) {
       'use strict';
       /* WEBPACK VAR INJECTION */ (function(Buffer) {
@@ -3335,18 +3318,18 @@ var SeatersSDK = /******/ (function(modules) {
 
       /***/
     },
-    /* 34 */
+    /* 33 */
     /***/ function(module, exports, __webpack_require__) {
       'use strict';
 
       Object.defineProperty(exports, '__esModule', { value: true });
       var app_api_1 = __webpack_require__(12);
       var fan_api_1 = __webpack_require__(6);
-      var admin_1 = __webpack_require__(37);
-      var health_1 = __webpack_require__(39);
+      var admin_1 = __webpack_require__(36);
+      var health_1 = __webpack_require__(38);
       var authentication_api_1 = __webpack_require__(17);
-      var ticketing_1 = __webpack_require__(40);
-      var payment_1 = __webpack_require__(42);
+      var ticketing_1 = __webpack_require__(39);
+      var payment_1 = __webpack_require__(41);
       var seaters_api_context_1 = __webpack_require__(5);
       var SeatersApi = /** @class */ (function() {
         function SeatersApi(prefix, requestDriver) {
@@ -3365,7 +3348,7 @@ var SeatersSDK = /******/ (function(modules) {
 
       /***/
     },
-    /* 35 */
+    /* 34 */
     /***/ function(module, exports, __webpack_require__) {
       'use strict';
 
@@ -3375,11 +3358,11 @@ var SeatersSDK = /******/ (function(modules) {
         }
       }
       Object.defineProperty(exports, '__esModule', { value: true });
-      __export(__webpack_require__(36));
+      __export(__webpack_require__(35));
 
       /***/
     },
-    /* 36 */
+    /* 35 */
     /***/ function(module, exports, __webpack_require__) {
       'use strict';
 
@@ -3438,7 +3421,7 @@ var SeatersSDK = /******/ (function(modules) {
 
       /***/
     },
-    /* 37 */
+    /* 36 */
     /***/ function(module, exports, __webpack_require__) {
       'use strict';
 
@@ -3448,11 +3431,11 @@ var SeatersSDK = /******/ (function(modules) {
         }
       }
       Object.defineProperty(exports, '__esModule', { value: true });
-      __export(__webpack_require__(38));
+      __export(__webpack_require__(37));
 
       /***/
     },
-    /* 38 */
+    /* 37 */
     /***/ function(module, exports, __webpack_require__) {
       'use strict';
 
@@ -3882,7 +3865,7 @@ var SeatersSDK = /******/ (function(modules) {
 
       /***/
     },
-    /* 39 */
+    /* 38 */
     /***/ function(module, exports, __webpack_require__) {
       'use strict';
 
@@ -3897,7 +3880,7 @@ var SeatersSDK = /******/ (function(modules) {
 
       /***/
     },
-    /* 40 */
+    /* 39 */
     /***/ function(module, exports, __webpack_require__) {
       'use strict';
 
@@ -3907,11 +3890,11 @@ var SeatersSDK = /******/ (function(modules) {
         }
       }
       Object.defineProperty(exports, '__esModule', { value: true });
-      __export(__webpack_require__(41));
+      __export(__webpack_require__(40));
 
       /***/
     },
-    /* 41 */
+    /* 40 */
     /***/ function(module, exports, __webpack_require__) {
       'use strict';
 
@@ -3965,7 +3948,7 @@ var SeatersSDK = /******/ (function(modules) {
 
       /***/
     },
-    /* 42 */
+    /* 41 */
     /***/ function(module, exports, __webpack_require__) {
       'use strict';
 
@@ -3975,11 +3958,11 @@ var SeatersSDK = /******/ (function(modules) {
         }
       }
       Object.defineProperty(exports, '__esModule', { value: true });
-      __export(__webpack_require__(43));
+      __export(__webpack_require__(42));
 
       /***/
     },
-    /* 43 */
+    /* 42 */
     /***/ function(module, exports, __webpack_require__) {
       'use strict';
 
@@ -4056,7 +4039,7 @@ var SeatersSDK = /******/ (function(modules) {
 
       /***/
     },
-    /* 44 */
+    /* 43 */
     /***/ function(module, exports, __webpack_require__) {
       'use strict';
 
@@ -4098,7 +4081,7 @@ var SeatersSDK = /******/ (function(modules) {
 
       /***/
     },
-    /* 45 */
+    /* 44 */
     /***/ function(module, exports, __webpack_require__) {
       'use strict';
 
@@ -4156,6 +4139,27 @@ var SeatersSDK = /******/ (function(modules) {
 
       /***/
     },
+    /* 45 */
+    /***/ function(module, exports, __webpack_require__) {
+      'use strict';
+
+      function __export(m) {
+        for (var p in m) {
+          if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+        }
+      }
+      Object.defineProperty(exports, '__esModule', { value: true });
+      __export(__webpack_require__(46));
+      __export(__webpack_require__(51));
+      __export(__webpack_require__(58));
+      __export(__webpack_require__(60));
+      __export(__webpack_require__(62));
+      __export(__webpack_require__(65));
+      __export(__webpack_require__(67));
+      __export(__webpack_require__(0));
+
+      /***/
+    },
     /* 46 */
     /***/ function(module, exports, __webpack_require__) {
       'use strict';
@@ -4167,27 +4171,6 @@ var SeatersSDK = /******/ (function(modules) {
       }
       Object.defineProperty(exports, '__esModule', { value: true });
       __export(__webpack_require__(47));
-      __export(__webpack_require__(52));
-      __export(__webpack_require__(58));
-      __export(__webpack_require__(60));
-      __export(__webpack_require__(62));
-      __export(__webpack_require__(65));
-      __export(__webpack_require__(67));
-      __export(__webpack_require__(0));
-
-      /***/
-    },
-    /* 47 */
-    /***/ function(module, exports, __webpack_require__) {
-      'use strict';
-
-      function __export(m) {
-        for (var p in m) {
-          if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-        }
-      }
-      Object.defineProperty(exports, '__esModule', { value: true });
-      __export(__webpack_require__(48));
       __export(__webpack_require__(2));
       __export(__webpack_require__(4));
       __export(__webpack_require__(18));
@@ -4195,7 +4178,7 @@ var SeatersSDK = /******/ (function(modules) {
 
       /***/
     },
-    /* 48 */
+    /* 47 */
     /***/ function(module, exports, __webpack_require__) {
       'use strict';
 
@@ -4238,8 +4221,8 @@ var SeatersSDK = /******/ (function(modules) {
       var waiting_list_service_1 = __webpack_require__(18);
       var fan_group_service_1 = __webpack_require__(19);
       var util_1 = __webpack_require__(0);
-      var fan_profiling_service_1 = __webpack_require__(50);
-      var fan_survey_service_1 = __webpack_require__(51);
+      var fan_profiling_service_1 = __webpack_require__(49);
+      var fan_survey_service_1 = __webpack_require__(50);
       var FanService = /** @class */ (function(_super) {
         __extends(FanService, _super);
         function FanService(seatersApi, sessionService) {
@@ -4748,7 +4731,7 @@ var SeatersSDK = /******/ (function(modules) {
 
       /***/
     },
-    /* 49 */
+    /* 48 */
     /***/ function(module, exports, __webpack_require__) {
       'use strict';
 
@@ -4781,7 +4764,7 @@ var SeatersSDK = /******/ (function(modules) {
 
       /***/
     },
-    /* 50 */
+    /* 49 */
     /***/ function(module, exports, __webpack_require__) {
       'use strict';
 
@@ -4829,7 +4812,7 @@ var SeatersSDK = /******/ (function(modules) {
 
       /***/
     },
-    /* 51 */
+    /* 50 */
     /***/ function(module, exports, __webpack_require__) {
       'use strict';
 
@@ -4890,7 +4873,7 @@ var SeatersSDK = /******/ (function(modules) {
 
       /***/
     },
-    /* 52 */
+    /* 51 */
     /***/ function(module, exports, __webpack_require__) {
       'use strict';
 
@@ -4900,24 +4883,13 @@ var SeatersSDK = /******/ (function(modules) {
         }
       }
       Object.defineProperty(exports, '__esModule', { value: true });
-      __export(__webpack_require__(53));
+      __export(__webpack_require__(52));
 
       /***/
     },
-    /* 53 */
+    /* 52 */
     /***/ function(module, exports, __webpack_require__) {
       'use strict';
-
-      var _typeof =
-        typeof Symbol === 'function' && typeof Symbol.iterator === 'symbol'
-          ? function(obj) {
-              return typeof obj;
-            }
-          : function(obj) {
-              return obj && typeof Symbol === 'function' && obj.constructor === Symbol && obj !== Symbol.prototype
-                ? 'symbol'
-                : typeof obj;
-            };
 
       var __assign =
         (undefined && undefined.__assign) ||
@@ -4932,11 +4904,11 @@ var SeatersSDK = /******/ (function(modules) {
           return t;
         };
       Object.defineProperty(exports, '__esModule', { value: true });
-      var algolia_for_seaters_1 = __webpack_require__(54);
+      var algolia_for_seaters_1 = __webpack_require__(53);
       var fan_types_1 = __webpack_require__(2);
       var PublicService = /** @class */ (function() {
         function PublicService(apiContext, requestDriver) {
-          this.algoliaForSeatersService = new algolia_for_seaters_1.AlgoliaForSeatersService(apiContext, requestDriver);
+          this.algoliaForSeatersService = new algolia_for_seaters_1.AlgoliaForSeatersService(apiContext);
         }
         PublicService.prototype.getFanGroup = function(fanGroupId) {
           var _this = this;
@@ -4949,52 +4921,6 @@ var SeatersSDK = /******/ (function(modules) {
           return this.algoliaForSeatersService.getWaitingListById(waitingListId).then(function(wl) {
             return __assign({}, wl, { actionStatus: _this.getWaitingListActionStatus(wl) });
           });
-        };
-        PublicService.prototype.getWaitingListsInFanGroup = function(
-          fanGroupId,
-          pagingOptions,
-          geoLoc,
-          keywords,
-          dateTimeStamp
-        ) {
-          var _this = this;
-          return this.algoliaForSeatersService
-            .getWaitingListsByFanGroupId(
-              fanGroupId,
-              pagingOptions.maxPageSize,
-              pagingOptions.page,
-              geoLoc,
-              keywords,
-              dateTimeStamp
-            )
-            .then(function(result) {
-              return _this.convertAlgoliaResultSet(result);
-            })
-            .then(function(result) {
-              result.items = result.items.map(function(wl) {
-                return __assign({}, wl, { actionStatus: _this.getWaitingListActionStatus(wl) });
-              });
-              return result;
-            });
-        };
-        PublicService.prototype.defaultPage = function(page) {
-          if ((typeof page === 'undefined' ? 'undefined' : _typeof(page)) === 'object') {
-            return page;
-          } else {
-            return {
-              maxPageSize: 10,
-              page: 0
-            };
-          }
-        };
-        PublicService.prototype.convertAlgoliaResultSet = function(searchResult) {
-          return {
-            items: searchResult.hits,
-            itemOffset: searchResult.page * searchResult.hitsPerPage,
-            page: searchResult.page,
-            maxPageSize: searchResult.hitsPerPage,
-            totalSize: searchResult.nbHits
-          };
         };
         PublicService.prototype.getFanGroupActionStatus = function(fanGroup) {
           if (fanGroup.accessMode === 'CODE_PROTECTED' || fanGroup.accessMode === 'PRIVATE') {
@@ -5041,7 +4967,7 @@ var SeatersSDK = /******/ (function(modules) {
 
       /***/
     },
-    /* 54 */
+    /* 53 */
     /***/ function(module, exports, __webpack_require__) {
       'use strict';
 
@@ -5051,52 +4977,22 @@ var SeatersSDK = /******/ (function(modules) {
         }
       }
       Object.defineProperty(exports, '__esModule', { value: true });
+      __export(__webpack_require__(54));
       __export(__webpack_require__(55));
-      __export(__webpack_require__(20));
 
       /***/
     },
-    /* 55 */
+    /* 54 */
     /***/ function(module, exports, __webpack_require__) {
       'use strict';
 
       Object.defineProperty(exports, '__esModule', { value: true });
-      var algolia_for_seaters_types_1 = __webpack_require__(20);
-      var DEFAULT_LOCALE = 'en';
-      var WL_FACET_FILTER = {
-        facet: algolia_for_seaters_types_1.TYPE_FIELD,
-        value: algolia_for_seaters_types_1.WL_ALGOLIA_TYPE
-      };
-      var FAN_GROUP_FACET_FILTER = {
-        facet: algolia_for_seaters_types_1.TYPE_FIELD,
-        value: algolia_for_seaters_types_1.FG_ALGOLIA_TYPE
-      };
       var AlgoliaForSeatersService = /** @class */ (function() {
-        function AlgoliaForSeatersService(apiContext, requestDriver) {
+        function AlgoliaForSeatersService(apiContext) {
           this.apiContext = apiContext;
-          this.requestDriver = requestDriver;
         }
         AlgoliaForSeatersService.prototype.getFanGroupById = function(fanGroupId) {
           return this.apiContext.get('/groups/:fanGroupId/look', { fanGroupId: fanGroupId });
-        };
-        AlgoliaForSeatersService.prototype.getFanGroupsById = function(fanGroupIds) {
-          var fanGroupIdsFilter = fanGroupIds
-            .map(function(fanGroupId) {
-              return 'fanGroupId:' + fanGroupId;
-            })
-            .join(' OR ');
-          var q = {
-            query: '',
-            typoTolerance: algolia_for_seaters_types_1.TYPO_TOLERANCE_STRICT,
-            facetFilters: [
-              {
-                facet: algolia_for_seaters_types_1.TYPE_FIELD,
-                value: algolia_for_seaters_types_1.FG_ALGOLIA_TYPE
-              }
-            ],
-            filters: fanGroupIdsFilter
-          };
-          return this.findExactlyN(q, fanGroupIds);
         };
         AlgoliaForSeatersService.prototype.getWaitingListsByFanGroupId = function(fanGroupId, hitsPerPage, page) {
           return this.apiContext.get(
@@ -5108,121 +5004,26 @@ var SeatersSDK = /******/ (function(modules) {
         AlgoliaForSeatersService.prototype.getWaitingListById = function(waitingListId) {
           return this.apiContext.get('/public/wishlists/' + waitingListId + '/public');
         };
-        AlgoliaForSeatersService.prototype.buildExactQuery = function(
-          query,
-          field,
-          type,
-          geoLoc,
-          keywords,
-          dateTimeStamp
-        ) {
-          return {
-            query: query,
-            typoTolerance: 'strict',
-            facetFilters: [
-              {
-                facet: 'type',
-                value: type
-              }
-            ],
-            aroundLatLng: geoLoc ? geoLoc.coord : undefined,
-            aroundRadius: geoLoc ? geoLoc.radius : undefined,
-            filters: dateTimeStamp ? 'eventStartDateTimestamp:' + dateTimeStamp : undefined,
-            tagFilters: keywords,
-            restrictSearchableAttributes: [field]
-          };
-        };
-        AlgoliaForSeatersService.prototype.findExactlyOne = function(searchQuery, entityType, identifier) {
-          return this.findExactlyN(searchQuery, [identifier]).then(function(results) {
-            return results[0];
-          });
-        };
-        AlgoliaForSeatersService.prototype.findExactlyN = function(searchQuery, identifiers) {
-          var n = identifiers.length;
-          return this.search(searchQuery).then(function(searchResult) {
-            if (searchResult.nbHits === n) {
-              if (searchResult.hits.length === n) {
-                return searchResult.hits;
-              } else {
-                // depending on algolia's limits we can technically ask for too many fangroups in one search query
-                // by the time this happens we're hopefully not using algolia for this purpose anymore.
-                var err = '[AlgoliaForSeatersService] could not fetch entire requested page-size';
-                console.error(err);
-                throw new Error(err);
-              }
-            } else {
-              var err = '[AlgoliaForSeatersService] unexpected nb hits from algolia on query';
-              console.log('[AlgoliaForSeatersService] expected %s but found %s results', n, searchResult.nbHits);
-              console.error(err, searchResult);
-              throw new Error(err);
-            }
-          });
-        };
-        AlgoliaForSeatersService.prototype.getSearchableAttributes = function(locale) {
-          if (!locale) {
-            locale = DEFAULT_LOCALE;
-          }
-          return this.appService.getEnv().then(function(env) {
-            var cfg = env.algoliaConfiguration;
-            if (!cfg.attributes.hasOwnProperty(locale)) {
-              if (locale === DEFAULT_LOCALE || !cfg.attributes.hasOwnProperty(DEFAULT_LOCALE)) {
-                var err =
-                  '[AlgoliaForSeatersService] seaters misconfiguration - searchable attributes for default locale undefined';
-                console.error(err);
-                throw err;
-              } else {
-                console.warn(
-                  '[AlgoliaForSeatersService] locale is not supported for search - falling back to %s',
-                  DEFAULT_LOCALE
-                );
-                locale = DEFAULT_LOCALE;
-              }
-            }
-            return cfg.attributes[locale];
-          });
-        };
-        AlgoliaForSeatersService.prototype.stripAlgoliaFieldsFromObject = function(result) {
-          // delete result._geoloc;
-          delete result._tags;
-          delete result._highlightResult;
-          delete result.objectID;
-          return result;
-        };
-        AlgoliaForSeatersService.prototype.stripAlgoliaFieldsFromSearchResultHits = function(result) {
-          var _this = this;
-          result.hits.forEach(function(hit) {
-            return _this.stripAlgoliaFieldsFromObject(hit);
-          });
-          return result;
-        };
-        AlgoliaForSeatersService.prototype.patchWaitingList = function(wl) {
-          // TODO remove as soon as backend exposes .price
-          if (!wl.hasOwnProperty('price')) {
-            wl.price = {
-              facialPrice: wl.facialPrice,
-              formattedFacialPrice: wl.formattedFacialPrice,
-              totalFacialPrice: wl.totalFacialPrice,
-              formattedTotalFacialPrice: wl.formattedTotalFacialPrice,
-              feeExcVat: wl.feeExcVat,
-              formattedFeeExcVat: wl.formattedFeeExcVat,
-              feeVat: wl.feeVat,
-              formattedFeeVat: wl.formattedFeeVat,
-              fee: wl.fee,
-              formattedFee: wl.formattedFee,
-              total: wl.total,
-              formattedTotal: wl.formattedTotal,
-              originalPrice: wl.originalPrice,
-              discountAmount: wl.discountAmount,
-              discountPercentage: wl.discountPercentage,
-              formattedOriginalPrice: wl.formattedOriginalPrice,
-              formattedDiscountAmount: wl.formattedDiscountAmount
-            };
-          }
-          return wl;
-        };
         return AlgoliaForSeatersService;
       })();
       exports.AlgoliaForSeatersService = AlgoliaForSeatersService;
+
+      /***/
+    },
+    /* 55 */
+    /***/ function(module, exports, __webpack_require__) {
+      'use strict';
+
+      function __export(m) {
+        for (var p in m) {
+          if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+        }
+      }
+      Object.defineProperty(exports, '__esModule', { value: true });
+      __export(__webpack_require__(56));
+      __export(__webpack_require__(57));
+      exports.TYPE_FIELD = 'type';
+      exports.TYPO_TOLERANCE_STRICT = 'strict';
 
       /***/
     },
