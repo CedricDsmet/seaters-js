@@ -2644,7 +2644,7 @@ var SeatersSDK = /******/ (function(modules) {
       Object.defineProperty(exports, '__esModule', { value: true });
       //noinspection TsLint
       // tslint:disable-next-line
-      exports.version = '1.36.2';
+      exports.version = '1.37.1';
       __export(__webpack_require__(22));
       var fan_types_1 = __webpack_require__(2);
       exports.fan = fan_types_1.fan;
@@ -5077,7 +5077,7 @@ var SeatersSDK = /******/ (function(modules) {
           this.requestDriver = requestDriver;
         }
         AlgoliaForSeatersService.prototype.getFanGroupById = function(fanGroupId) {
-          return this.apiContext.get('/fan/groups/:fanGroupId', { fanGroupId: fanGroupId });
+          return this.apiContext.get('/groups/:fanGroupId/look', { fanGroupId: fanGroupId });
         };
         AlgoliaForSeatersService.prototype.getFanGroupsById = function(fanGroupIds) {
           var fanGroupIdsFilter = fanGroupIds

@@ -1,9 +1,7 @@
 import { RequestDriver } from '../../api';
-import { PagedResult, PagingOptions } from '../../shared-types';
-import { SeatersApi, SeatersApiContext } from '../../seaters-api';
-import { AlgoliaForSeatersService, TypedSearchResult, GeoLoc } from '../algolia-for-seaters';
+import { SeatersApiContext } from '../../seaters-api';
+import { AlgoliaForSeatersService } from '../algolia-for-seaters';
 
-import { AppService } from '../app-service';
 import { pub } from './public-types';
 import { fan } from '../fan-service/fan-types';
 type ACCESS_MODE = 'PUBLIC' | 'PRIVATE' | 'CODE_PROTECTED';
@@ -32,7 +30,7 @@ export class PublicService {
   private algoliaForSeatersService: AlgoliaForSeatersService;
 
   constructor(apiContext: SeatersApiContext, requestDriver: RequestDriver) {
-    this.algoliaForSeatersService = new AlgoliaForSeatersService(apiContext, requestDriver);
+    this.algoliaForSeatersService = new AlgoliaForSeatersService(apiContext);
   }
 
   getFanGroup(fanGroupId: string): Promise<pub.FanGroup> {
@@ -46,50 +44,6 @@ export class PublicService {
     return this.algoliaForSeatersService
       .getWaitingListById(waitingListId)
       .then(wl => ({ ...wl, actionStatus: this.getWaitingListActionStatus(wl) }));
-  }
-
-  getWaitingListsInFanGroup(
-    fanGroupId: string,
-    pagingOptions: PagingOptions,
-    geoLoc?: GeoLoc,
-    keywords?: string[],
-    dateTimeStamp?: string
-  ): Promise<PagedResult<pub.WaitingList>> {
-    return this.algoliaForSeatersService
-      .getWaitingListsByFanGroupId(
-        fanGroupId,
-        pagingOptions.maxPageSize,
-        pagingOptions.page,
-        geoLoc,
-        keywords,
-        dateTimeStamp
-      )
-      .then(result => this.convertAlgoliaResultSet(result))
-      .then(result => {
-        result.items = result.items.map(wl => ({ ...wl, actionStatus: this.getWaitingListActionStatus(wl) }));
-        return result;
-      });
-  }
-
-  private defaultPage(page: PagingOptions): PagingOptions {
-    if (typeof (page as any) === 'object') {
-      return page;
-    } else {
-      return {
-        maxPageSize: 10,
-        page: 0
-      };
-    }
-  }
-
-  private convertAlgoliaResultSet<T>(searchResult: TypedSearchResult<T>): PagedResult<T> {
-    return {
-      items: searchResult.hits as T[],
-      itemOffset: searchResult.page * searchResult.hitsPerPage,
-      page: searchResult.page,
-      maxPageSize: searchResult.hitsPerPage,
-      totalSize: searchResult.nbHits
-    };
   }
 
   private getFanGroupActionStatus(
