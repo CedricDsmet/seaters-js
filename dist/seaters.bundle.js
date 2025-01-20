@@ -2627,7 +2627,7 @@ var SeatersSDK = /******/ (function(modules) {
       Object.defineProperty(exports, '__esModule', { value: true });
       //noinspection TsLint
       // tslint:disable-next-line
-      exports.version = '1.37.1';
+      exports.version = '1.37.5';
       __export(__webpack_require__(21));
       var fan_types_1 = __webpack_require__(2);
       exports.fan = fan_types_1.fan;
@@ -4922,6 +4922,17 @@ var SeatersSDK = /******/ (function(modules) {
             return __assign({}, wl, { actionStatus: _this.getWaitingListActionStatus(wl) });
           });
         };
+        PublicService.prototype.getWaitingListsInFanGroup = function(fanGroupId, pagingOptions) {
+          var _this = this;
+          return this.algoliaForSeatersService
+            .getWaitingListsByFanGroupId(fanGroupId, pagingOptions.maxPageSize, pagingOptions.itemOffset)
+            .then(function(result) {
+              result.items = result.items.map(function(wl) {
+                return __assign({}, wl, { actionStatus: _this.getWaitingListActionStatus(wl) });
+              });
+              return result;
+            });
+        };
         PublicService.prototype.getFanGroupActionStatus = function(fanGroup) {
           if (fanGroup.accessMode === 'CODE_PROTECTED' || fanGroup.accessMode === 'PRIVATE') {
             return fan_types_1.fan.FAN_GROUP_ACTION_STATUS.CAN_UNLOCK;
@@ -4994,11 +5005,14 @@ var SeatersSDK = /******/ (function(modules) {
         AlgoliaForSeatersService.prototype.getFanGroupById = function(fanGroupId) {
           return this.apiContext.get('/groups/:fanGroupId/look', { fanGroupId: fanGroupId });
         };
-        AlgoliaForSeatersService.prototype.getWaitingListsByFanGroupId = function(fanGroupId, hitsPerPage, page) {
+        AlgoliaForSeatersService.prototype.getWaitingListsByFanGroupId = function(fanGroupId, hitsPerPage, itemOffset) {
+          if (itemOffset === void 0) {
+            itemOffset = 0;
+          }
           return this.apiContext.get(
-            '/groups/' + fanGroupId + '/wishlists/publicsdk',
+            '/public/wishlists/' + fanGroupId + '/wishlists/publicsdk',
             {},
-            { page: page, maxPageSize: hitsPerPage }
+            { itemOffset: itemOffset, maxPageSize: hitsPerPage }
           );
         };
         AlgoliaForSeatersService.prototype.getWaitingListById = function(waitingListId) {

@@ -1,5 +1,5 @@
 import { RequestDriver } from '../../api';
-import { SeatersApiContext } from '../../seaters-api';
+import { PagedResult, PagingOptions, SeatersApiContext } from '../../seaters-api';
 import { AlgoliaForSeatersService } from '../algolia-for-seaters';
 
 import { pub } from './public-types';
@@ -44,6 +44,15 @@ export class PublicService {
     return this.algoliaForSeatersService
       .getWaitingListById(waitingListId)
       .then(wl => ({ ...wl, actionStatus: this.getWaitingListActionStatus(wl) }));
+  }
+
+  getWaitingListsInFanGroup(fanGroupId: string, pagingOptions: PagingOptions): Promise<PagedResult<pub.WaitingList>> {
+    return this.algoliaForSeatersService
+      .getWaitingListsByFanGroupId(fanGroupId, pagingOptions.maxPageSize, pagingOptions.itemOffset)
+      .then(result => {
+        result.items = result.items.map(wl => ({ ...wl, actionStatus: this.getWaitingListActionStatus(wl) }));
+        return result;
+      });
   }
 
   private getFanGroupActionStatus(

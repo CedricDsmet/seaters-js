@@ -1,5 +1,5 @@
 import { FanGroup, WaitingList } from './algolia-for-seaters-types';
-import { SeatersApiContext } from '../../seaters-api';
+import { PagedResult, SeatersApiContext } from '../../seaters-api';
 
 export class AlgoliaForSeatersService {
   constructor(private apiContext: SeatersApiContext) {}
@@ -8,8 +8,16 @@ export class AlgoliaForSeatersService {
     return this.apiContext.get('/groups/:fanGroupId/look', { fanGroupId });
   }
 
-  getWaitingListsByFanGroupId(fanGroupId: string, hitsPerPage: number, page: number): Promise<WaitingList> {
-    return this.apiContext.get(`/groups/${fanGroupId}/wishlists/publicsdk`, {}, { page, maxPageSize: hitsPerPage });
+  getWaitingListsByFanGroupId(
+    fanGroupId: string,
+    hitsPerPage: number,
+    itemOffset: number = 0
+  ): Promise<PagedResult<WaitingList>> {
+    return this.apiContext.get(
+      `/public/wishlists/${fanGroupId}/wishlists/publicsdk`,
+      {},
+      { itemOffset, maxPageSize: hitsPerPage }
+    );
   }
 
   getWaitingListById(waitingListId: string): Promise<WaitingList> {
