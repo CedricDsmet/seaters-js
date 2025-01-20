@@ -14,7 +14,7 @@ export class AlgoliaForSeatersService {
     itemOffset: number = 0
   ): Promise<PagedResult<WaitingList>> {
     return this.apiContext.get(
-      `/public/wishlists/${fanGroupId}/wishlists/publicsdk`,
+      `/public/groups/${fanGroupId}/wishlists/publicsdk`,
       {},
       { itemOffset, maxPageSize: hitsPerPage }
     );
